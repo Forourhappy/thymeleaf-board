@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.thymeleafboard.mapper.FileBoardMapper">
+
+  <select id="readBoardList" resultType="com.example.thymeleafboard.bean.FileBoardVO">
+    select * from file_board
+    order by b_no
+  </select>
+
+  <select id="readBoardList" resultType="com.example.thymeleafboard.bean.FileBoardVO"></select>
+</mapper>
