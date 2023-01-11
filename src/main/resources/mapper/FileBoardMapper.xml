@@ -9,5 +9,25 @@
     order by b_no
   </select>
 
-  <select id="readBoardList" resultType="com.example.thymeleafboard.bean.FileBoardVO"></select>
+  <select id="BoardDetail" resultType="com.example.thymeleafboard.bean.FileBoardVO">
+    select * from file_board
+    where b_no=#{b_no}
+  </select>
+
+  <insert id="boardInsert" parameterType="com.example.thymeleafboard.bean.FileBoardVO" keyProperty="b_no">
+    insert into file_board(title, content, writer)
+    values(#{title}, #{content}, #{writer})
+  </insert>
+
+  <update id="boardUpdate" parameterType="com.example.thymeleafboard.bean.FileBoardVO">
+    update file_board set
+    <if test="title != null">title=#{title}</if>
+    <if test="title != null and content != null">,</if>
+    <if test="content != null">content=#{content}</if>
+    where b_no=#{b_no}
+  </update>
+
+  <delete id="boardDelete" parameterType="int">
+    delete from file_board where b_no#{b_no}
+  </delete>
 </mapper>
