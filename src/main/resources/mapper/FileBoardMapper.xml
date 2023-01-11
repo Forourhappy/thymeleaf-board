@@ -30,4 +30,13 @@
   <delete id="boardDelete" parameterType="int">
     delete from file_board where b_no#{b_no}
   </delete>
+
+  <insert id="fileInsert" parameterType="com.example.thymeleafboard.bean.FileVO">
+    <selectKey keyProperty="b_no" resultType="int" order="BEFORE">
+      select max(b_no)
+      from file_board
+    </selectKey>
+    insert into file(b_no, filename, fileoriginname, fileurl)
+    values(#{b_no}, ${filename}, #{fileoriginname}, #{fileurl})
+  </insert>
 </mapper>

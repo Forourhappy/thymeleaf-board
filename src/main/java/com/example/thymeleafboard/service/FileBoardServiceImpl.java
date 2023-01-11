@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.thymeleafboard.bean.FileBoardVO;
+import com.example.thymeleafboard.bean.FileVO;
 import com.example.thymeleafboard.mapper.FileBoardMapper;
 
 @Service
@@ -36,5 +37,10 @@ public class FileBoardServiceImpl implements FileBoardService {
   @Override
   public int boardDelete(int b_no) {
     return fileBoardMapper.boardDelete(b_no);
+  }
+
+  @Override
+  public int fileInsert(FileVO file) {
+    return fileBoardMapper.fileInsert(file);
   }
 }

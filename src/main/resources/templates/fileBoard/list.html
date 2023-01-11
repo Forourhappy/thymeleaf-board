@@ -1,48 +1,67 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<title>파일게시판-리스트페이</title>
+		<style type="text/css">
+			li {
+				list-style: none;
+				float: left;
+			}
+		</style>
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>파일게시판-리스트페이</title>
-  <style type="text/css">
-    li {
-      list-style: none;
-      float: left;
-    }
-  </style>
-</head>
+	<body>
+		<div>
+			<div style="padding: 10px; text-align: center">
+				<h1>
+					<a th:href="@{/fileBoard/list}" style="text-decoration: none"
+						>파일자료실</a
+					>
+				</h1>
+			</div>
 
-<body>
-  <div>
+			<div>
+				<table>
+					<thead style="text-align: center">
+						<tr>
+							<th style="text-align: center">순서</th>
+							<th style="text-align: center">작성자</th>
+							<th style="text-align: center">제목</th>
+							<th style="text-align: center">작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							th:each="data : ${testlist}"
+							th:onclick="'window.location.href = \'' + @{/fileBoard/detail/{bno}(bno=${data.b_no})} + '\''"
+						>
+							<td
+								th:text="${data.b_no}"
+								style="cursor: pointer; text-align: center"
+							></td>
+							<td
+								th:text="${data.writer}"
+								style="cursor: pointer; text-align: center"
+							></td>
+							<td
+								th:text="${data.title}"
+								style="cursor: pointer; text-align: center"
+							></td>
+							<td
+								th:text="${data.reg_date}"
+								style="cursor: pointer; text-align: center"
+							></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
-    <div style="padding: 10px; text-align: center;">
-      <h1>
-        <a th:href="@{/fileBoard/list}" style="text-decoration: none;">파일자료실</a>
-      </h1>
-    </div>
-  </div>
+			<div style="text-align: right">
+				<button onclick="location.href='/fileBoard/insert'">글작성</button>
+			</div>
 
-  <div>
-    <table>
-      <thead style="text-align: center;">
-        <tr>
-          <th style="text-align: center;">순서</th>
-          <th style="text-align: center;">작성자</th>
-          <th style="text-align: center;">제목</th>
-          <th style="text-align: center;">작성일</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="data : ${testlist}"
-          th:onclick="'window.location.href = \'' + @{/fileBoard/detail/{bno}(bno=${data.b_no})} + '\''">
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</body>
-
+			<br /><br /><br />
+		</div>
+	</body>
 </html>
