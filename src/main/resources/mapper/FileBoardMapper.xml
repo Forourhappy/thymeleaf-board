@@ -9,7 +9,7 @@
     order by b_no
   </select>
 
-  <select id="BoardDetail" resultType="com.example.thymeleafboard.bean.FileBoardVO">
+  <select id="boardDetail" resultType="com.example.thymeleafboard.bean.FileBoardVO">
     select * from file_board
     where b_no=#{b_no}
   </select>
@@ -37,6 +37,11 @@
       from file_board
     </selectKey>
     insert into file(b_no, filename, fileoriginname, fileurl)
-    values(#{b_no}, ${filename}, #{fileoriginname}, #{fileurl})
+    values(#{b_no}, #{filename}, #{fileoriginname}, #{fileurl})
   </insert>
+
+  <select id="fileDetail" parameterType="int" resultType="com.example.thymeleafboard.bean.FileVO">
+    select * from file
+    where b_no=#{b_no}
+  </select>
 </mapper>

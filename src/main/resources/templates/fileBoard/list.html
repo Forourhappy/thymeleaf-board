@@ -21,6 +21,8 @@
 				</h1>
 			</div>
 
+			<!--/* 타임리프 관련 태그에 내용이 없어도 무적권 에러ㅇㅅㅇ */-->
+
 			<div>
 				<table>
 					<thead style="text-align: center">
@@ -33,7 +35,7 @@
 					</thead>
 					<tbody>
 						<tr
-							th:each="data : ${testlist}"
+							th:each="data : ${testList}"
 							th:onclick="'window.location.href = \'' + @{/fileBoard/detail/{bno}(bno=${data.b_no})} + '\''"
 						>
 							<td

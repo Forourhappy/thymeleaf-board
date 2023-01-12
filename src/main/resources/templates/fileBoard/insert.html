@@ -20,7 +20,7 @@
 				<form
 					role="form"
 					th:object="${fileBoardVO}"
-					th:action="@{/fileBoard/insertProc"
+					th:action="@{/fileBoard/insertProc}"
 					method="post"
 					enctype="multipart/form-data"
 				>
@@ -42,7 +42,7 @@
 							th:field="*{writer}"
 							id="writer"
 							name="writer"
-							placeholder="작성자를 입려가세요"
+							placeholder="작성자를 입력하세요"
 							required
 						/>
 					</div>
@@ -63,6 +63,7 @@
 					<div style="text-align: right">
 						<input
 							type="submit"
+							formmethod="get"
 							th:value="목록"
 							th:formaction="@{/fileBoard/list}"
 						/>

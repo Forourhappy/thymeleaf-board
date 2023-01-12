@@ -21,4 +21,6 @@ public interface FileBoardMapper {
   int boardDelete(int b_no);
 
   int fileInsert(FileVO file);
+
+  FileVO fileDetail(int b_no);
 }
