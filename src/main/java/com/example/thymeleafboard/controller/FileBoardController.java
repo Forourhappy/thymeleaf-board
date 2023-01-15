@@ -177,6 +177,7 @@ public class FileBoardController {
         byte b[] = new byte[(int) file.length()];
         int leng = 0;
 
+        // 질문. os로 내보내면 b[] 데이터에 변동이 생기는지?
         while ((leng = in.read(b)) > 0) {
           os.write(b, 0, leng);
         }
