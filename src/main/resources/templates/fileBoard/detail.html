@@ -40,7 +40,7 @@
             <input type="hidden" th:field="${detail.content}">
           </div>
           <div>
-            <label style="font-weight: bolder;"></label>
+            <label style="font-weight: bolder;">첨부파일</label>
             <p><a th:if="${file}" th:href="@{/fileBoard/fileDown/{bno}(bno=${file.b_no})}">
               [[${file.fileoriginname}]]
             </a></p>
