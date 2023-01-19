@@ -23,4 +23,5 @@ public interface FileBoardService {
   int fileInsert(FileVO file);
 
   FileVO fileDetail(int b_no);
+
 }

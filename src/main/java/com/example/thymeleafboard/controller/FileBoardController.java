@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -101,6 +102,7 @@ public class FileBoardController {
   @RequestMapping("/update/{b_no}")
   private String boardUpdate(@PathVariable("b_no") int b_no, Model model) {
     model.addAttribute("detail", fBoardService.boardDetail(b_no));
+    model.addAttribute("file", fBoardService.fileDetail(b_no));
     return "/fileBoard/update";
   }
 
@@ -195,6 +197,12 @@ public class FileBoardController {
     } catch (Exception e) {
       System.out.println("ERROR : " + e.getStackTrace());
     }
+
+  }
+
+  @RequestMapping("/deleteFile/{f_no}")
+  public void deleteFile(@PathVariable("f_no") int f_no) {
+    FileVO file = fBoardService.fileDetail(f_no);
 
   }
 }
