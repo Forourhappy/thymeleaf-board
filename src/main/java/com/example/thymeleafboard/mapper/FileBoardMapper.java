@@ -23,4 +23,6 @@ public interface FileBoardMapper {
   int fileInsert(FileVO file);
 
   FileVO fileDetail(int b_no);
+
+  void deleteFile(int b_no);
 }

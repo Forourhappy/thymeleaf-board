@@ -200,9 +200,19 @@ public class FileBoardController {
 
   }
 
-  @RequestMapping("/deleteFile/{f_no}")
-  public void deleteFile(@PathVariable("f_no") int f_no) {
-    FileVO file = fBoardService.fileDetail(f_no);
+  @RequestMapping("/deleteFile/{b_no}")
+  public String deleteFile(@PathVariable("b_no") int b_no) {
+    FileVO oldFile = fBoardService.fileDetail(b_no);
 
+    try {
+      File newFile = new File(oldFile.getFileurl() + oldFile.getFilename());
+      if (newFile.exists()) {
+        newFile.delete();
+        fBoardService.deleteFile(b_no);
+      }
+    } catch (NullPointerException e) {
+      System.out.println(e);
+    }
+    return "redirect:/fileBoard/update/" + b_no;
   }
 }

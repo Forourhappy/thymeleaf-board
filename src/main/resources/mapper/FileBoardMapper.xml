@@ -44,4 +44,8 @@
     select * from file
     where b_no=#{b_no}
   </select>
+
+  <delete id="deleteFile">
+    delete from file where b_no=#{b_no}
+  </delete>
 </mapper>

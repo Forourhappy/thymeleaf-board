@@ -43,16 +43,16 @@
         		</textarea
 						>
 					</div>
-					<form th:if="${file}">
+					<form th:if="${file}" th:name="">
 						[[${file.fileoriginname}]]
-						<button
-							type="submit"
-							th:fileId="${file.f_no}"
-							th:formaction="@{/fileBoard/fileDelete/{fno}(fno=${file.f_no})}"
-						>
-							삭제
-						</button>
+						<input type="file" th:unless="${file}" />
 					</form>
+					<button
+						type="submit"
+						th:formaction="@{/fileBoard/deleteFile/{bno}(bno=${file.b_no})}"
+					>
+						삭제
+					</button>
 					<div style="text-align: right">
 						<input type="hidden" name="b_no" th:value="${detail.b_no}" />
 						<input
@@ -71,21 +71,5 @@
 			</div>
 			<br /><br /><br />
 		</div>
-		<script>
-			// function fileDelete(fno) {
-			// 	const $form = document.querySelector('form');
-			// 	const $file = document.querySelector('file');
-			// 	$form.removeChild($file);
-			// 	const $newFile = document.createElement('div');
-			// 	$newFile.className = 'file';
-			// 	$newFile.innerHTML = '[[${file.fileoriginname}]]';
-			// 	const $newButton = document.createElement('button');
-			// 	$newButton.attributes;
-
-			// 	fetch(`/fileBoard/deleteFile/${fno}`)
-			// 		.then(res => console.log('성공', res))
-			// 		.catch(err => console.log('실패', err));
-			// }
-		</script>
 	</body>
 </html>

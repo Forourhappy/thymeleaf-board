@@ -24,4 +24,5 @@ public interface FileBoardService {
 
   FileVO fileDetail(int b_no);
 
+  void deleteFile(int b_no);
 }
