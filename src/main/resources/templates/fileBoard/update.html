@@ -43,16 +43,16 @@
         		</textarea
 						>
 					</div>
-					<form th:if="${file}" th:name="">
+					<form th:if="${file}">
 						[[${file.fileoriginname}]]
-						<input type="file" th:unless="${file}" />
+						<button
+							type="submit"
+							th:formaction="@{/fileBoard/deleteFile/{bno}(bno=${file.b_no})}"
+						>
+							삭제
+						</button>
 					</form>
-					<button
-						type="submit"
-						th:formaction="@{/fileBoard/deleteFile/{bno}(bno=${file.b_no})}"
-					>
-						삭제
-					</button>
+					<input type="file" name="files" th:unless="${file}" />
 					<div style="text-align: right">
 						<input type="hidden" name="b_no" th:value="${detail.b_no}" />
 						<input
