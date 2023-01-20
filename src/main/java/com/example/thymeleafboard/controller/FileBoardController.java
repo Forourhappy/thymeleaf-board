@@ -65,36 +65,11 @@ public class FileBoardController {
   @RequestMapping("/insertProc")
   private String boardInsertProc(@ModelAttribute FileBoardVO board, @RequestPart MultipartFile files,
       HttpServletRequest request)
-      throws IllegalStateException, IOException, Exception {
+      throws Exception {
 
-    if (files.isEmpty()) {
-      fBoardService.boardInsert(board);
-    } else {
-      String fileName = files.getOriginalFilename();
-      // 확장자
-      String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
-      File destinationFile;
-      String destinationFileName;
-      String fileUrl = "C:\\WorkPlace\\thymeleaf-board\\public\\";
-
-      do {
-        destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
-        destinationFile = new File(fileUrl + destinationFileName);
-        // 질문. 실질적으로 파일이 존재하는지 확인하는지?
-      } while (destinationFile.exists());
-
-      destinationFile.getParentFile().mkdirs();
-      files.transferTo(destinationFile);
-
-      fBoardService.boardInsert(board);
-
-      FileVO file = new FileVO();
-      file.setB_no(board.getB_no());
-      file.setFilename(destinationFileName);
-      file.setFileoriginname(fileName);
-      file.setFileurl(fileUrl);
-
-      fBoardService.fileInsert(file);
+    fBoardService.boardInsert(board);
+    if (!files.isEmpty()) {
+      fileUpload(board, files);
     }
     return "forward:/fileBoard/list";
   }
@@ -107,8 +82,11 @@ public class FileBoardController {
   }
 
   @RequestMapping("/updateProc")
-  private String boardUpdateProc(@ModelAttribute FileBoardVO board) {
+  private String boardUpdateProc(@ModelAttribute FileBoardVO board, @RequestPart MultipartFile files)
+      throws IllegalStateException, IOException {
     fBoardService.boardUpdate(board);
+    if (!files.isEmpty())
+      fileUpload(board, files);
     int bno = board.getB_no();
     String b_no = Integer.toString(bno);
     return "redirect:/fileBoard/detail/" + b_no;
@@ -118,6 +96,33 @@ public class FileBoardController {
   private String boardDelete(@PathVariable("b_no") int b_no) {
     fBoardService.boardDelete(b_no);
     return "redirect:/fileBoard/list";
+  }
+
+  private void fileUpload(@ModelAttribute FileBoardVO board, @RequestPart MultipartFile files)
+      throws IllegalStateException, IOException {
+    String fileName = files.getOriginalFilename();
+    // 확장자
+    String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
+    File destinationFile;
+    String destinationFileName;
+    String fileUrl = "E:\\WorkPlace\\thymeleaf-board\\public\\";
+
+    do {
+      destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
+      destinationFile = new File(fileUrl + destinationFileName);
+      // 질문. 실질적으로 파일이 존재하는지 확인하는지?
+    } while (destinationFile.exists());
+
+    destinationFile.getParentFile().mkdirs();
+    files.transferTo(destinationFile);
+
+    FileVO file = new FileVO();
+    file.setB_no(board.getB_no());
+    file.setFilename(destinationFileName);
+    file.setFileoriginname(fileName);
+    file.setFileurl(fileUrl);
+
+    fBoardService.fileInsert(file);
   }
 
   @RequestMapping("/fileDown/{b_no}")
