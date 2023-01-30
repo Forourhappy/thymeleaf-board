@@ -45,7 +45,7 @@
     where b_no=#{b_no}
   </select>
 
-  <delete id="deleteFile">
+  <delete id="deleteFile" parameterType="int">
     delete from file where b_no=#{b_no}
   </delete>
 </mapper>

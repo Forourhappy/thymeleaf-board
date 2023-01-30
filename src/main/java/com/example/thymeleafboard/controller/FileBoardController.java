@@ -105,7 +105,7 @@ public class FileBoardController {
     String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
     File destinationFile;
     String destinationFileName;
-    String fileUrl = "E:\\WorkPlace\\thymeleaf-board\\public\\";
+    String fileUrl = "C:\\WorkPlace\\thymeleaf-board\\public\\";
 
     do {
       destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
@@ -208,9 +208,10 @@ public class FileBoardController {
   @RequestMapping("/deleteFile/{b_no}")
   public String deleteFile(@PathVariable("b_no") int b_no) {
     FileVO oldFile = fBoardService.fileDetail(b_no);
-
+    System.out.println(oldFile.toString());
     try {
       File newFile = new File(oldFile.getFileurl() + oldFile.getFilename());
+      System.out.println(newFile.toString());
       if (newFile.exists()) {
         newFile.delete();
         fBoardService.deleteFile(b_no);

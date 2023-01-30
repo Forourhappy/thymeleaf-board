@@ -21,9 +21,8 @@
 				</h1>
 			</div>
 
-			<!--/* 타임리프 관련 태그에 내용이 없어도 무적권 에러ㅇㅅㅇ */-->
-
 			<div>
+				<div id="map" style="width: 100%; height: 350px"></div>
 				<table>
 					<thead style="text-align: center">
 						<tr>
@@ -65,5 +64,19 @@
 
 			<br /><br /><br />
 		</div>
+		<script
+			type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=KEY"
+		></script>
+		<script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+				mapOption = {
+					center: new kakao.maps.LatLng(35.1498749, 126.9199035), // 지도의 중심좌표
+					level: 3, // 지도의 확대 레벨
+				};
+
+			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+		</script>
 	</body>
 </html>
