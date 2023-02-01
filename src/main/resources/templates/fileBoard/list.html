@@ -1,82 +1,65 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-		<title>파일게시판-리스트페이</title>
-		<style type="text/css">
-			li {
-				list-style: none;
-				float: left;
-			}
-		</style>
-	</head>
 
-	<body>
-		<div>
-			<div style="padding: 10px; text-align: center">
-				<h1>
-					<a th:href="@{/fileBoard/list}" style="text-decoration: none"
-						>파일자료실</a
-					>
-				</h1>
-			</div>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <title>파일게시판-리스트페이</title>
+  <style type="text/css">
+  li {
+    list-style: none;
+    float: left;
+  }
+  </style>
+</head>
 
-			<div>
-				<div id="map" style="width: 100%; height: 350px"></div>
-				<table>
-					<thead style="text-align: center">
-						<tr>
-							<th style="text-align: center">순서</th>
-							<th style="text-align: center">작성자</th>
-							<th style="text-align: center">제목</th>
-							<th style="text-align: center">작성일</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr
-							th:each="data : ${testList}"
-							th:onclick="'window.location.href = \'' + @{/fileBoard/detail/{bno}(bno=${data.b_no})} + '\''"
-						>
-							<td
-								th:text="${data.b_no}"
-								style="cursor: pointer; text-align: center"
-							></td>
-							<td
-								th:text="${data.writer}"
-								style="cursor: pointer; text-align: center"
-							></td>
-							<td
-								th:text="${data.title}"
-								style="cursor: pointer; text-align: center"
-							></td>
-							<td
-								th:text="${data.reg_date}"
-								style="cursor: pointer; text-align: center"
-							></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+<body>
+  <div>
+    <div style="padding: 10px; text-align: center">
+      <h1>
+        <a th:href="@{/fileBoard/list}" style="text-decoration: none">파일자료실</a>
+      </h1>
+    </div>
 
-			<div style="text-align: right">
-				<button onclick="location.href='/fileBoard/insert'">글작성</button>
-			</div>
+    <div>
+      <div id="map" style="width: 100%; height: 350px"></div>
+      <table>
+        <thead style="text-align: center">
+          <tr>
+            <th style="text-align: center">순서</th>
+            <th style="text-align: center">작성자</th>
+            <th style="text-align: center">제목</th>
+            <th style="text-align: center">작성일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="data : ${testList}"
+            th:onclick="'window.location.href = \'' + @{/fileBoard/detail/{bno}(bno=${data.b_no})} + '\''">
+            <td th:text="${data.b_no}" style="cursor: pointer; text-align: center"></td>
+            <td th:text="${data.writer}" style="cursor: pointer; text-align: center"></td>
+            <td th:text="${data.title}" style="cursor: pointer; text-align: center"></td>
+            <td th:text="${data.reg_date}" style="cursor: pointer; text-align: center"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-			<br /><br /><br />
-		</div>
-		<script
-			type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=KEY"
-		></script>
-		<script>
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-				mapOption = {
-					center: new kakao.maps.LatLng(35.1498749, 126.9199035), // 지도의 중심좌표
-					level: 3, // 지도의 확대 레벨
-				};
+    <div style="text-align: right">
+      <button onclick="location.href='/fileBoard/insert'">글작성</button>
+    </div>
 
-			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-			var map = new kakao.maps.Map(mapContainer, mapOption);
-		</script>
-	</body>
+    <br /><br /><br />
+  </div>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=KEY"></script>
+  <script>
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+      center: new kakao.maps.LatLng(35.1493479, 126.9218479), // 지도의 중심좌표
+      level: 3, // 지도의 확대 레벨
+    };
+
+  // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+  var map = new kakao.maps.Map(mapContainer, mapOption);
+  </script>
+</body>
+
 </html>
