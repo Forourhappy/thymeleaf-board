@@ -25,4 +25,6 @@ public interface FileBoardMapper {
   FileVO fileDetail(int b_no);
 
   void deleteFile(int b_no);
+
+  List<FileVO> fileList();
 }

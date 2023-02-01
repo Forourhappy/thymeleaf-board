@@ -42,6 +42,9 @@ public class FileBoardController {
     List<FileBoardVO> testList = new ArrayList<>();
     testList = fBoardService.readBoardList();
     model.addAttribute("testList", testList);
+    List<FileVO> fileList = new ArrayList<>();
+    fileList = fBoardService.fileList();
+    model.addAttribute("fileList", fileList);
     return "/fileBoard/list";
   }
 
@@ -105,7 +108,7 @@ public class FileBoardController {
     String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
     File destinationFile;
     String destinationFileName;
-    String fileUrl = "C:\\WorkPlace\\thymeleaf-board\\public\\";
+    String fileUrl = "E:\\WorkPlace\\thymeleaf-board\\public\\";
 
     do {
       destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
@@ -221,4 +224,5 @@ public class FileBoardController {
     }
     return "redirect:/fileBoard/update/" + b_no;
   }
+
 }

@@ -53,4 +53,9 @@ public class FileBoardServiceImpl implements FileBoardService {
   public void deleteFile(int b_no) {
     fileBoardMapper.deleteFile(b_no);
   }
+
+  @Override
+  public List<FileVO> fileList() {
+    return fileBoardMapper.fileList();
+  }
 }
