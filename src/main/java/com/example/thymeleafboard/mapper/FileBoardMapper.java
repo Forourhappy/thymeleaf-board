@@ -1,6 +1,7 @@
 package com.example.thymeleafboard.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,7 +11,7 @@ import com.example.thymeleafboard.bean.FileVO;
 @Mapper
 public interface FileBoardMapper {
 
-  List<FileBoardVO> readBoardList();
+  List<Map<String, String>> readBoardList();
 
   FileBoardVO boardDetail(int b_no);
 

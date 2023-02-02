@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -39,12 +40,10 @@ public class FileBoardController {
 
   @RequestMapping("/list")
   private String readBoardList(Model model) {
-    List<FileBoardVO> testList = new ArrayList<>();
+
+    List<Map<String, String>> testList = new ArrayList<>();
     testList = fBoardService.readBoardList();
     model.addAttribute("testList", testList);
-    List<FileVO> fileList = new ArrayList<>();
-    fileList = fBoardService.fileList();
-    model.addAttribute("fileList", fileList);
     return "/fileBoard/list";
   }
 
@@ -108,7 +107,7 @@ public class FileBoardController {
     String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
     File destinationFile;
     String destinationFileName;
-    String fileUrl = "E:\\WorkPlace\\thymeleaf-board\\public\\";
+    String fileUrl = "C:/Users/smhrd/Desktop/thymeleaf-board/src/main/resources/images/";
 
     do {
       destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
@@ -138,7 +137,6 @@ public class FileBoardController {
     // 파일 업로드 경로
     try {
       String fileUrl = fileVO.getFileurl();
-      System.out.println(fileUrl);
       fileUrl += "/";
       String savePath = fileUrl;
       String fileName = fileVO.getFilename();

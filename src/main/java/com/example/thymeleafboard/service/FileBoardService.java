@@ -1,6 +1,7 @@
 package com.example.thymeleafboard.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import com.example.thymeleafboard.bean.FileVO;
 @Service
 public interface FileBoardService {
 
-  List<FileBoardVO> readBoardList();
+  List<Map<String, String>> readBoardList();
 
   FileBoardVO boardDetail(int b_no);
 

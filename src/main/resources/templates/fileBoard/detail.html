@@ -42,8 +42,8 @@
           <div>
             <label style="font-weight: bolder;">첨부파일</label>
             <p><a th:if="${file}" th:href="@{/fileBoard/fileDown/{bno}(bno=${file.b_no})}">
-              [[${file.fileoriginname}]]
-            </a></p>
+                [[${file.fileoriginname}]]
+              </a></p>
           </div>
           <div style="text-align: right;">
             <input type="submit" th:value="목록" th:formaction="@{/fileBoard/list}">
@@ -53,7 +53,9 @@
         </form>
       </div>
     </div>
-
+    <script th:inline="javascript">
+      
+    </script>
 </body>
 
 </html>
