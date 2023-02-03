@@ -66,7 +66,8 @@
 		</div>
 		<script
 			type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=KEY"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=KEY
+			"
 		></script>
 		<script th:inline="javascript">
 			let testList = [[${testList}]];
@@ -124,9 +125,9 @@
 			function displayInfowindow(marker, list) {
 				console.log(list.filename);
 				if(list.filename){
-			  var content = `<div style="padding:5px;z-index:1;">
-					<img src="../../../../../public/${list.filename}" alt=""></img>
-					<span>${list.title}</span>
+			  var content = `<div style="padding:5px;z-index:1;width:200px;">
+					<img src="/public/${list.filename}" width="200px" alt=""></img>
+					<p style="margin:0;">${list.title}</p>
 					</div>`;
 				} else {
 					content = `<div style="padding:5px;z-index:1;">

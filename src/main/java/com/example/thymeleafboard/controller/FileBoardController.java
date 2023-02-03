@@ -107,7 +107,7 @@ public class FileBoardController {
     String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
     File destinationFile;
     String destinationFileName;
-    String fileUrl = "C:/Users/smhrd/Desktop/thymeleaf-board/src/main/resources/images/";
+    String fileUrl = "C:/WorkPlace/thymeleaf-board/public/";
 
     do {
       destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
