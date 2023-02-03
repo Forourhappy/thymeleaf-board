@@ -8,6 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+  // upload.path=/public/**
+  // resource.path=file:///C:/WorkPlace/thymeleaf-board/public/
   @Value("${resource.path}")
   private String resourcePath;
 

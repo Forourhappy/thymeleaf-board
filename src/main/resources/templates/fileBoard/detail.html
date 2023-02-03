@@ -1,61 +1,163 @@
 <!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<title>파일게시판 - 상세페이지</title>
+	</head>
 
-  <title>파일게시판 - 상세페이지</title>
-</head>
+	<body>
+		<div>
+			<div style="padding: 10px; text-align: center">
+				<h1>
+					<a th:href="@{/fileBoard/list}" style="text-decoration: none"
+						>크레이지아케이드 - 자료실</a
+					>
+				</h1>
+			</div>
 
-<body>
-  <div>
-    <div style="padding: 10px; text-align: center">
-      <h1>
-        <a th:href="@{/fileBoard/list}" style="text-decoration: none">크레이지아케이드 - 자료실</a>
-      </h1>
-    </div>
+			<div>
+				<div>
+					<h4 style="font-weight: bolder">상세내용</h4>
+					<br />
+					<div id="map" style="width: 100%; height: 350px"></div>
+					<form
+						role="form"
+						th:object="${fileBoardVO}"
+						th:action="@{/fileBoard/list}"
+						method="post"
+					>
+						<div>
+							<label style="font-weight: bolder">제목</label>
+							<p th:text="${detail.title}"></p>
+							<input type="hidden" th:field="${detail.title}" />
+						</div>
+						<div>
+							<label style="font-weight: bolder">작성자</label>
+							<p th:text="${detail.writer}"></p>
+							<input type="hidden" th:field="${detail.writer}" />
+						</div>
+						<div>
+							<label style="font-weight: bolder">작성일자</label>
+							<p th:text="${detail.reg_date}"></p>
+						</div>
+						<div>
+							<label style="font-weight: bolder">내용</label>
+							<p th:text="${detail.content}"></p>
+							<input type="hidden" th:field="${detail.content}" />
+						</div>
+						<div>
+							<label style="font-weight: bolder">첨부파일</label>
+							<p>
+								<a
+									th:if="${file}"
+									th:href="@{/fileBoard/fileDown/{bno}(bno=${file.b_no})}"
+								>
+									[[${file.fileoriginname}]]
+								</a>
+							</p>
+						</div>
+						<div style="text-align: right">
+							<input
+								type="submit"
+								th:value="목록"
+								th:formaction="@{/fileBoard/list}"
+							/>
+							<input
+								type="submit"
+								th:value="수정"
+								th:formaction="@{/fileBoard/update/{bno}(bno=${detail.b_no})}"
+							/>
+							<input
+								type="submit"
+								th:value="삭제"
+								th:formaction="@{/fileBoard/delete/{bno}(bno=${detail.b_no})}"
+							/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script
+			type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=KEY"
+		></script>
+		<script th:inline="javascript">
+			const detail = [[${detail}]];
+			const file = [[${file}]];
+			   let toggleInfo = false,
+			      marker;
+			const mapContainer = document.getElementById('map'), // 지도를 표시할 div
+			mapOption = {
+			center: new kakao.maps.LatLng(detail.lat, detail.lng), // 지도의 중심좌표
+			level: 3 // 지도의 확대 레벨
+			};
 
-    <div>
-      <div>
-        <h4 style="font-weight: bolder;">상세내용</h4>
-        <br>
-        <form role="form" th:object="${fileBoardVO}" th:action="@{/fileBoard/list}" method="post">
-          <div>
-            <label style="font-weight: bolder;">제목</label>
-            <p th:text="${detail.title}"></p>
-            <input type="hidden" th:field="${detail.title}">
-          </div>
-          <div>
-            <label style="font-weight: bolder;">작성자</label>
-            <p th:text="${detail.writer}"></p>
-            <input type="hidden" th:field="${detail.writer}">
-          </div>
-          <div>
-            <label style="font-weight: bolder;">작성일자</label>
-            <p th:text="${detail.reg_date}"></p>
-          </div>
-          <div>
-            <label style="font-weight: bolder;">내용</label>
-            <p th:text="${detail.content}"></p>
-            <input type="hidden" th:field="${detail.content}">
-          </div>
-          <div>
-            <label style="font-weight: bolder;">첨부파일</label>
-            <p><a th:if="${file}" th:href="@{/fileBoard/fileDown/{bno}(bno=${file.b_no})}">
-                [[${file.fileoriginname}]]
-              </a></p>
-          </div>
-          <div style="text-align: right;">
-            <input type="submit" th:value="목록" th:formaction="@{/fileBoard/list}">
-            <input type="submit" th:value="수정" th:formaction="@{/fileBoard/update/{bno}(bno=${detail.b_no})}">
-            <input type="submit" th:value="삭제" th:formaction="@{/fileBoard/delete/{bno}(bno=${detail.b_no})}">
-          </div>
-        </form>
-      </div>
-    </div>
-    <script th:inline="javascript">
-      
-    </script>
-</body>
+			const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+			// 마커가 표시될 위치입니다
+			const markerPosition  = new kakao.maps.LatLng(detail.lat, detail.lng);
+
+			addMarker(markerPosition);
+
+			// 마커를 생성합니다
+			function addMarker(position) {
+			  // 마커 이미지의 이미지 주소입니다
+			  const imageSrc =
+			    'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
+
+			  // 마커 이미지의 이미지 크기 입니다
+			  const imageSize = new kakao.maps.Size(24, 35);
+
+			  // 마커 이미지를 생성합니다
+			  const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+			  marker = new kakao.maps.Marker({
+			    position: position, // 마커의 위치
+			    image: markerImage,
+			  });
+
+			     // 마커가 지도 위에 표시되도록 설정합니다
+			     marker.setMap(map);
+			}
+
+			// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+			// marker.setMap(null);
+
+			// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+			const infowindow = new kakao.maps.InfoWindow({
+			zIndex: 1,
+			});
+
+			// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+			// 인포윈도우에 장소명을 표시합니다
+			function displayInfowindow() {
+			     let content = '';
+			     if(!!file) {
+			       content = `<div style="padding:5px;z-index:1;width:200px;">
+			         <img src="/public/${file.filename}" width="200px" alt=""></img>
+			         <p style="margin:0;">${detail.title}</p>
+			         </div>`;
+			     } else {
+			       content = `<div style="padding:5px;z-index:1;">
+			       ${detail.title}
+			       </div>`;
+			     }
+
+			     infowindow.setContent(content);
+			     infowindow.open(map, marker);
+			}
+
+			 kakao.maps.event.addListener(marker, 'click', function() {
+
+			       if(!toggleInfo){
+			         toggleInfo = true;
+			         displayInfowindow(marker);
+			       } else {
+			         toggleInfo = false;
+			         infowindow.close();
+			       }
+			 });
+		</script>
+	</body>
 </html>
