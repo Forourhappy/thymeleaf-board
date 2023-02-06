@@ -69,16 +69,12 @@
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=KEY"
 		></script>
 		<script th:inline="javascript">
-			const testList = [
-			  [$ {
-			    testList
-			  }]
-			];
+			const testList = [[${testList}]];
 			const markers = [];
 
 			const mapContainer = document.getElementById('map'), // 지도를 표시할 div
 			  mapOption = {
-			    center: new kakao.maps.LatLng(35.1493479, 126.9218479), // 지도의 중심좌표
+			    center: new kakao.maps.LatLng(35.1498685, 126.9199202), // 지도의 중심좌표
 			    level: 3, // 지도의 확대 레벨
 			  };
 
@@ -128,12 +124,12 @@
 			function displayInfowindow(marker, list) {
 			  let content = '';
 			  if (list.filename) {
-			    content = `<div style="padding:5px;z-index:1;width:200px; height:100%;">
+			    content = `<div style="padding:5px;width:200px;height:100%;">
 						<img src="/public/${list.filename}" width="200px" alt=""></img>
 						<p style="margin:0;">${list.title}</p>
 						</div>`;
 			  } else {
-			    content = `<div style="padding:5px;z-index:1;">
+			    content = `<div style="padding:5px;height:100%">
 						${list.title}
 						</div>`;
 			  }
