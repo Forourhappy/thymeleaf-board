@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,6 +37,9 @@ public class FileBoardController {
 
   @Autowired
   FileBoardService fBoardService;
+
+  @Value("${resource.path}")
+  private String resourcePath;
 
   @RequestMapping("/list")
   private String readBoardList(Model model) {
@@ -107,7 +110,7 @@ public class FileBoardController {
     String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();
     File destinationFile;
     String destinationFileName;
-    String fileUrl = "C:/WorkPlace/thymeleaf-board/public/";
+    String fileUrl = resourcePath.split("file:///")[1];
 
     do {
       destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
